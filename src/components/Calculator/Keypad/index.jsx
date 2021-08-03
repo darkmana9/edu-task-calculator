@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button} from "@/components/Calculator/Keypad/Button"
-import {KeyPadGrid} from "@/components/Calculator/Keypad/components"
+import {KeypadWrapper} from "@/components/Calculator/Keypad/components"
 
 
 export const Keypad = () => {
@@ -12,11 +12,11 @@ export const Keypad = () => {
       '.', '(', '0', ')', 'CE']
 
   return (
-    <KeyPadGrid>
+    <KeypadWrapper>
       {buttonsText.map((el, i) => {
 
         return <Button key={i} text={buttonsText[i]}/>
       })}
-    </KeyPadGrid>
+    </KeypadWrapper>
   )
 }

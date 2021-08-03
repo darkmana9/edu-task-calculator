@@ -1,12 +1,14 @@
 import React from 'react'
 import {Heading} from "@/pages/Home/components"
+import {HistoryTextArea, HistoryWrapper} from "@/components/Calculator/History/components"
+
 
 
 export const History = () => {
     return (
-      <div>
+      <HistoryWrapper>
         <Heading>History</Heading>
-        <textarea>History textarea</textarea>
-      </div>
+        <HistoryTextArea>History textarea</HistoryTextArea>
+      </HistoryWrapper>
     )
 }

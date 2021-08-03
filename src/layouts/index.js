@@ -17,3 +17,13 @@ export const HeaderLayout = styled.div`
   border: 1px solid;
   padding: 20px;
 `
+
+export const CalculatorLayout = styled.div`
+  display: grid;
+  border: 1px solid;
+  padding: 20px;
+  grid-template-areas:
+        "d h"
+        "k h";
+  grid-template-columns: 1fr 20%;
+`
