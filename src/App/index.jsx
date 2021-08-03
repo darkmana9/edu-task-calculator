@@ -9,6 +9,8 @@ const HomePage = lazy(() => import('@/pages/Home'))
 
 export default () => (
   <Suspense fallback={<Loader />}>
+
+    <Header/>
     <Switch>
       <Route
         exact
