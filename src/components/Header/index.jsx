@@ -1,10 +1,11 @@
 import React from 'react'
 import {NavLink} from "react-router-dom"
 import {HeaderTitleText} from "@/components/Header/components"
+import {HeaderLayout} from "@/layouts"
 
 export const Header = () => {
   return (
-    <div>
+    <HeaderLayout>
       <HeaderTitleText>
         Calculator App
       </HeaderTitleText>
@@ -12,6 +13,6 @@ export const Header = () => {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/settings">Settings</NavLink>
       </nav>
-    </div>
+    </HeaderLayout>
   )
 }
