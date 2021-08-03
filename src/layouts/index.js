@@ -14,4 +14,6 @@ export const HeaderLayout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid;
+  padding: 20px;
 `
