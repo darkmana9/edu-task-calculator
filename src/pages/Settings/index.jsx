@@ -1,12 +1,25 @@
 import React from 'react'
 
 import { PageLayout } from '@/layouts'
-import {Calculator} from "@/components/Calculator"
+import {Heading} from "@/pages/Home/components"
+import {SettingsOptions} from "@/pages/Settings/components"
+
 
 export default () => {
   return (
     <PageLayout>
-      <Calculator/>
+      <Heading>Settings</Heading>
+      <SettingsOptions>
+      <label htmlFor="theme">
+        Switch theme
+      <select name="theme">
+        <option value="LightTheme">Light Theme</option>
+        <option value="DarkTheme">Dark Theme</option>
+        <option selected value="Colored Theme">Colored Theme</option>
+      </select>
+      </label>
+      <button>Clear all history</button>
+      </SettingsOptions>
     </PageLayout>
   )
 }
