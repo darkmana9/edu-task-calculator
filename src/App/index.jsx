@@ -11,7 +11,6 @@ const Settings = lazy(() => import('@/pages/Settings'))
 
 export default () => (
   <Suspense fallback={<Loader />}>
-
     <Header/>
     <Switch>
       <Route

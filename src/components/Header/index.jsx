@@ -1,6 +1,5 @@
 import React from 'react'
-import {NavLink} from "react-router-dom"
-import {HeaderNavLayout, HeaderTitleText} from "@/components/Header/components"
+import {HeaderNavLayout, HeaderTitleText, LinksText} from "@/components/Header/components"
 import {HeaderLayout} from "@/layouts"
 
 export const Header = () => {
@@ -10,8 +9,8 @@ export const Header = () => {
         Calculator App
       </HeaderTitleText>
       <HeaderNavLayout>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/settings">Settings</NavLink>
+        <LinksText to="/">Home</LinksText>
+        <LinksText to="/settings">Settings</LinksText>
       </HeaderNavLayout>
     </HeaderLayout>
   )
