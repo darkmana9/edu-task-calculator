@@ -3,7 +3,7 @@ import {Button} from "@/components/Calculator/Keypad/Button"
 import {KeypadWrapper} from "@/components/Calculator/Keypad/components"
 
 
-export const Keypad = () => {
+export const Keypad = props => {
 
   const buttonsText =
     ['C', '7', '8', '9', '*',
@@ -14,8 +14,9 @@ export const Keypad = () => {
   return (
     <KeypadWrapper>
       {buttonsText.map((el, i) => {
-
-        return <Button key={i} text={buttonsText[i]}/>
+        return <Button handleNumbersButtons={props.handleNumbersButtons}
+                       key={i}
+                       text={buttonsText[i]}/>
       })}
     </KeypadWrapper>
   )

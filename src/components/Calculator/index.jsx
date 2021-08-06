@@ -5,12 +5,31 @@ import {Keypad} from "@/components/Calculator/Keypad"
 import {CalculatorLayout} from "@/layouts"
 
 
-export const Calculator = () => {
+export class Calculator extends React.Component{
+  constructor(props) {
+    super(props)
+    this.state = {
+      inputValue: '',
+    }
+  }
+
+  handleNumbersButtons = text => {
+    this.setState(prevState => {
+      return {
+        inputValue: prevState.inputValue + text,
+      }
+    })
+  }
+
+  render() {
     return (
       <CalculatorLayout>
-        <Display/>
+        <Display inputValue={this.state.inputValue}/>
         <History/>
-        <Keypad/>
+        <Keypad handleNumbersButtons={this.handleNumbersButtons}/>
       </CalculatorLayout>
     )
+  }
+
+
 }
