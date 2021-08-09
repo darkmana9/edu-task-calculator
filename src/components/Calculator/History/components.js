@@ -21,5 +21,7 @@ export const HistoryTextArea = styled.textarea`
     -webkit-box-shadow: 5px 5px 5px -5px rgb(34 60 80 / 20%) inset;
     background-color: #f9f9fd;
   };
+  font-size: 24px;
+
 
 `

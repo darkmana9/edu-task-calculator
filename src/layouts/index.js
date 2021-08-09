@@ -25,5 +25,5 @@ export const CalculatorLayout = styled.div`
   grid-template-areas:
         "d h"
         "k h";
-  grid-template-columns: 1fr 20%;
+  grid-template-columns: 1fr 35%;
 `
