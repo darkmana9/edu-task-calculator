@@ -6,8 +6,9 @@ export const Button = props => {
 
   return (
     <Fragment>
-      {props.text.match(/[0-9]/) ? <KeypadButton onClick={e => { return props.handleNumbersButtons(props.text, e)}}>{props.text}</KeypadButton> :
-                                   <KeypadButton>{props.text}</KeypadButton>}
+      {props.text.match(/[0-9,.]/) ? <KeypadButton onClick={e => {return props.handleNumbersButtons(props.text, e)}}>{props.text}</KeypadButton> :
+                                   <KeypadButton onClick={e => {return props.handleOperationsButton(props.text, e)}} >{props.text}</KeypadButton>}
+
     </Fragment>
   )
 }
