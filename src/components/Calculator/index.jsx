@@ -75,7 +75,7 @@ const DivCommand = function (value) {
 }
 const CalculatorF = function () {
   let current = 0
-  const commands = []
+  let commands = []
   return {
     execute: function (command) {
       current = command.execute(current, command.value)
@@ -93,11 +93,14 @@ const CalculatorF = function () {
     getCurrentValue: function () {
       return current
     },
-    getCommands: function () {
-      return commands
-    },
+
     setFirstInputValue: function (val) {
       current = val
+    },
+    reset: function (){
+      current = 0
+      commands = []
+      console.log(commands)
     },
   }
 }
@@ -136,12 +139,21 @@ export class Calculator extends React.Component {
           this.setState({
             inputValue: '',
           })
+          break
+        }
+        case "C": {
+          this.calculator.reset()
+          this.firstInputValue = 0
+          this.setState({
+            inputValue: '',
+          })
+          break
         }
       }
   }
 
   handleOperationsButton = operation => {
-    if (!isNaN(this.state.inputValue) || this.state.inputValue !== '') {
+    if ( this.state.inputValue !== '') {
       if (this.firstInputValue === 0) {
         this.firstInputValue = this.state.inputValue
         this.calculator.setFirstInputValue(+this.firstInputValue)
@@ -167,10 +179,8 @@ export class Calculator extends React.Component {
         this.setState(prevState => {
           return {
             history: prevState.history.concat(`${this.calculator.getPrevValue()} ${this.state.currentOperation} ${this.state.inputValue}  \n`),
+            inputValue: this.calculator.getCurrentValue(),
           }
-        })
-        this.setState({
-          inputValue: this.calculator.getCurrentValue(),
         })
         this.inputFlag = 1
       }
