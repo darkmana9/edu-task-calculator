@@ -38,19 +38,19 @@ class ErrorBoundary extends React.Component {
 }
 
 function add(x, y) {
-  return x + y
+  return  Math.round((x + y) * 1000)/1000
 }
 
 function sub(x, y) {
-  return x - y
+  return  Math.round((x - y) * 1000)/1000
 }
 
 function mul(x, y) {
-  return x * y
+  return  Math.round((x * y) * 1000)/1000
 }
 
 function div(x, y) {
-  return x / y
+  return  Math.round((x / y) * 1000)/1000
 }
 
 const Command = function (execute, undo, value) {
