@@ -3,11 +3,11 @@ import {Heading} from "@/pages/Home/components"
 import {HistoryTextArea, HistoryWrapper} from "@/components/Calculator/History/components"
 
 
-export const History = () => {
+export const History = props => {
   return (
     <HistoryWrapper>
       <Heading>History</Heading>
-      <HistoryTextArea readOnly></HistoryTextArea>
+      <HistoryTextArea value={props.history.join('')} readOnly></HistoryTextArea>
     </HistoryWrapper>
   )
 }
