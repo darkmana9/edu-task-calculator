@@ -13,4 +13,7 @@ export const LinksText = styled(NavLink)`
     font-size: 16px;
     color: black;
     text-decoration: none;
+    &.active {
+    border-bottom: 1px solid;
+  }
 `

@@ -9,8 +9,8 @@ export const Header = () => {
         Calculator App
       </HeaderTitleText>
       <HeaderNavLayout>
-        <LinksText to="/">Home</LinksText>
-        <LinksText to="/settings">Settings</LinksText>
+        <LinksText exact to="/">Home</LinksText>
+        <LinksText exact to="/settings">Settings</LinksText>
       </HeaderNavLayout>
     </HeaderLayout>
   )
