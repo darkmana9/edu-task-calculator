@@ -16,6 +16,7 @@ export const Keypad = props => {
       {buttonsText.map((el, i) => {
         return <Button handleNumbersButtons={props.handleNumbersButtons}
                        handleOperationsButton={props.handleOperationsButton}
+                       handleSimpleOperationsButton={props.handleSimpleOperationsButton}
                        key={i}
                        text={buttonsText[i]}/>
       })}

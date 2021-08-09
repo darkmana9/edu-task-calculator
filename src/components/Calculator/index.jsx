@@ -112,6 +112,7 @@ export class Calculator extends React.Component {
       inputValue: '',
       currentOperation: '',
       history: [],
+      operationInputValue: '',
     }
   }
 
@@ -129,60 +130,63 @@ export class Calculator extends React.Component {
     })
   }
 
-  handleOperationsButton = operation => {
-    switch (operation) {
-      case 'CE': {
-        this.setState({
-          inputValue: '',
-        })
-        break
-      }
-      case '=': {
-
-        break
-      }
-      default: {
-        if (this.firstInputValue === 0) {
-          this.firstInputValue = this.state.inputValue
-          this.calculator.setFirstInputValue(+this.firstInputValue)
-        } else {
-          switch (this.state.currentOperation) {
-            case "+": {
-              this.calculator.execute(new AddCommand(+this.state.inputValue))
-              break
-            }
-            case "-": {
-              this.calculator.execute(new SubCommand(+this.state.inputValue))
-              break
-            }
-            case "*": {
-              this.calculator.execute(new MulCommand(+this.state.inputValue))
-              break
-            }
-            case "/": {
-              this.calculator.execute(new DivCommand(+this.state.inputValue))
-              break
-            }
-          }
-          this.state.history.push(`${this.calculator.getPrevValue()} ${this.state.currentOperation} ${this.state.inputValue}  \n`)
-          this.setState({
-            inputValue: this.calculator.getCurrentValue(),
-          })
-          this.inputFlag = 1
-        }
-
-        if (this.inputFlag === 0) {
-          this.inputFlag = 1
+  handleSimpleOperationsButton = operation => {
+      switch (operation){
+        case "CE": {
           this.setState({
             inputValue: '',
           })
         }
+      }
+  }
+
+  handleOperationsButton = operation => {
+    if (!isNaN(this.state.inputValue) || this.state.inputValue !== '') {
+      if (this.firstInputValue === 0) {
+        this.firstInputValue = this.state.inputValue
+        this.calculator.setFirstInputValue(+this.firstInputValue)
+      } else {
+        switch (this.state.currentOperation) {
+          case "+": {
+            this.calculator.execute(new AddCommand(+this.state.inputValue))
+            break
+          }
+          case "-": {
+            this.calculator.execute(new SubCommand(+this.state.inputValue))
+            break
+          }
+          case "*": {
+            this.calculator.execute(new MulCommand(+this.state.inputValue))
+            break
+          }
+          case "/": {
+            this.calculator.execute(new DivCommand(+this.state.inputValue))
+            break
+          }
+        }
+        this.setState(prevState => {
+          return {
+            history: prevState.history.concat(`${this.calculator.getPrevValue()} ${this.state.currentOperation} ${this.state.inputValue}  \n`),
+          }
+        })
         this.setState({
-          currentOperation: operation,
+          inputValue: this.calculator.getCurrentValue(),
+        })
+        this.inputFlag = 1
+      }
+
+      if (this.inputFlag === 0) {
+        this.inputFlag = 1
+        this.setState({
+          inputValue: '',
         })
       }
+      this.setState({
+        currentOperation: operation,
+      })
     }
   }
+
 
   render() {
     return (
@@ -190,7 +194,8 @@ export class Calculator extends React.Component {
         <ErrorBoundary>
           <Display inputValue={this.state.inputValue}/>
           <History history={this.state.history}/>
-          <Keypad handleOperationsButton={this.handleOperationsButton} handleNumbersButtons={this.handleNumbersButtons}/>
+
+          <Keypad handleSimpleOperationsButton={this.handleSimpleOperationsButton} handleOperationsButton={this.handleOperationsButton} handleNumbersButtons={this.handleNumbersButtons}/>
         </ErrorBoundary>
       </CalculatorLayout>
     )
