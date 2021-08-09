@@ -15,6 +15,7 @@ export const Keypad = props => {
     <KeypadWrapper>
       {buttonsText.map((el, i) => {
         return <Button handleNumbersButtons={props.handleNumbersButtons}
+                       handleOperationsButton={props.handleOperationsButton}
                        key={i}
                        text={buttonsText[i]}/>
       })}
