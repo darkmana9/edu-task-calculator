@@ -38,19 +38,19 @@ class ErrorBoundary extends React.Component {
 }
 
 function add(x, y) {
-  return  Math.round((x + y) * 1000)/1000
+  return Math.round((x + y) * 1000) / 1000
 }
 
 function sub(x, y) {
-  return  Math.round((x - y) * 1000)/1000
+  return Math.round((x - y) * 1000) / 1000
 }
 
 function mul(x, y) {
-  return  Math.round((x * y) * 1000)/1000
+  return Math.round((x * y) * 1000) / 1000
 }
 
 function div(x, y) {
-  return  Math.round((x / y) * 1000)/1000
+  return Math.round((x / y) * 1000) / 1000
 }
 
 const Command = function (execute, undo, value) {
@@ -97,7 +97,7 @@ const CalculatorF = function () {
     setFirstInputValue: function (val) {
       current = val
     },
-    reset: function (){
+    reset: function () {
       current = 0
       commands = []
       console.log(commands)
@@ -134,30 +134,31 @@ export class Calculator extends React.Component {
   }
 
   handleSimpleOperationsButton = operation => {
-      switch (operation){
-        case "CE": {
-          this.setState({
-            inputValue: '',
-          })
-          break
-        }
-        case "C": {
-          this.calculator.reset()
-          this.firstInputValue = 0
-          this.setState({
-            inputValue: '',
-          })
-          break
-        }
-        case "=": {
-          this.handleOperationsButton(this.state.currentOperation)
-          break
-        }
+    switch (operation) {
+      case "CE": {
+        this.setState({
+          inputValue: '',
+        })
+        break
       }
+      case "C": {
+        this.calculator.reset()
+        this.firstInputValue = 0
+        this.setState({
+          inputValue: '',
+        })
+        break
+      }
+      case "=": {
+        this.handleOperationsButton(this.state.currentOperation)
+        this.firstInputValue = 0
+        break
+      }
+    }
   }
 
   handleOperationsButton = operation => {
-    if ( this.state.inputValue !== '') {
+    if (this.state.inputValue !== '') {
       if (this.firstInputValue === 0) {
         this.firstInputValue = this.state.inputValue
         this.calculator.setFirstInputValue(+this.firstInputValue)
@@ -195,9 +196,11 @@ export class Calculator extends React.Component {
           inputValue: '',
         })
       }
+
       this.setState({
         currentOperation: operation,
       })
+
     }
   }
 
@@ -209,7 +212,8 @@ export class Calculator extends React.Component {
           <Display inputValue={this.state.inputValue}/>
           <History history={this.state.history}/>
 
-          <Keypad handleSimpleOperationsButton={this.handleSimpleOperationsButton} handleOperationsButton={this.handleOperationsButton} handleNumbersButtons={this.handleNumbersButtons}/>
+          <Keypad handleSimpleOperationsButton={this.handleSimpleOperationsButton} handleOperationsButton={this.handleOperationsButton}
+                  handleNumbersButtons={this.handleNumbersButtons}/>
         </ErrorBoundary>
       </CalculatorLayout>
     )
@@ -217,6 +221,7 @@ export class Calculator extends React.Component {
 
   componentDidMount() {
     this.calculator = new CalculatorF()
+
   }
 
 }
