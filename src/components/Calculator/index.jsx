@@ -149,6 +149,10 @@ export class Calculator extends React.Component {
           })
           break
         }
+        case "=": {
+          this.handleOperationsButton(this.state.currentOperation)
+          break
+        }
       }
   }
 
