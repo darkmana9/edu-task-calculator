@@ -17,7 +17,7 @@ export const Keypad = props => {
         return <Button handleNumbersButtons={props.handleNumbersButtons}
                        handleOperationsButton={props.handleOperationsButton}
                        handleSimpleOperationsButton={props.handleSimpleOperationsButton}
-                       key={i}
+                       key={buttonsText[i]}
                        text={buttonsText[i]}/>
       })}
     </KeypadWrapper>
