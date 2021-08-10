@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {Profiler} from 'react'
 
-import { PageLayout } from '@/layouts'
+import {PageLayout} from '@/layouts'
 import {Calculator} from "@/components/Calculator"
+
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
@@ -34,11 +35,24 @@ class ErrorBoundary extends React.Component {
   }
 
 }
+
 export default () => {
+  const onRenderCallback = (id,
+                            phase,
+                            actualDuration,
+                            baseDuration,
+                            startTime,
+                            commitTime,
+                            interactions) => {
+    console.log(`id: ${id} phase: ${phase} actualDuration: ${actualDuration} baseDuration:${baseDuration}
+                startTime: ${startTime} commitTime: ${commitTime}  interactions: ${interactions}`)
+  }
   return (
     <PageLayout>
       <ErrorBoundary>
-        <Calculator/>
+        <Profiler id="calculator" onRender={onRenderCallback}>
+          <Calculator/>
+        </Profiler>
       </ErrorBoundary>
     </PageLayout>
   )
