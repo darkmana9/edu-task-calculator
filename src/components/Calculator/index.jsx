@@ -180,7 +180,6 @@ export class Calculator extends React.Component {
 
           <Display inputValue={this.state.inputValue}/>
           <History history={this.state.history}/>
-
           <Keypad handleSimpleOperationsButton={this.handleSimpleOperationsButton} handleOperationsButton={this.handleOperationsButton}
                   handleNumbersButtons={this.handleNumbersButtons}/>
 

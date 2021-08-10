@@ -1,5 +1,6 @@
 import React from 'react'
 import {DisplayInput, DisplayWrapper} from "@/components/Calculator/Display/components"
+import * as PropTypes from "prop-types"
 
 
 export const Display = props => {
@@ -9,4 +10,8 @@ export const Display = props => {
                     type="text"/>
     </DisplayWrapper>
   )
+}
+
+Display.prototype = {
+  inputValue: PropTypes.string,
 }
