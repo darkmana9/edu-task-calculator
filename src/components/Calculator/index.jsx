@@ -5,7 +5,6 @@ import {Keypad} from "@/components/Calculator/Keypad"
 import {CalculatorLayout} from "@/layouts"
 
 
-
 function add(x, y) {
   return Math.round((x + y) * 1000) / 1000
 }
@@ -42,35 +41,40 @@ const MulCommand = function (value) {
 const DivCommand = function (value) {
   return new Command(div, mul, value)
 }
-const CalculatorF = function () {
-  let current = 0
-  let commands = []
-  return {
-    execute: function (command) {
-      current = command.execute(current, command.value)
-      commands.push(command)
-    },
-    undo: function () {
-      const command = commands.pop()
-      current = command.undo(current, command.value)
-    },
-    getPrevValue: function () {
-      const temp = commands.slice()
-      const command = temp.pop()
-      return command.undo(current, command.value)
-    },
-    getCurrentValue: function () {
-      return current
-    },
 
-    setFirstInputValue: function (val) {
-      current = val
-    },
-    reset: function () {
-      current = 0
-      commands = []
-      console.log(commands)
-    },
+class CalculatorF {
+  current = 0
+  commands = []
+
+  execute(command) {
+    this.current = command.execute(this.current, command.value)
+    this.commands.push(command)
+  }
+
+  undo() {
+    const command = this.commands.pop()
+    this.current = command.undo(this.current, command.value)
+  }
+
+  getPrevValue() {
+    const temp = this.commands.slice()
+    const command = temp.pop()
+    return command.undo(this.current, command.value)
+  }
+
+  getCurrentValue() {
+    return this.current
+  }
+
+  setFirstInputValue(val) {
+    this.current = val
+  }
+
+  reset() {
+    this.current = 0
+    this.commands = []
+
+
   }
 }
 
@@ -178,10 +182,10 @@ export class Calculator extends React.Component {
     return (
       <CalculatorLayout>
 
-          <Display inputValue={this.state.inputValue}/>
-          <History history={this.state.history}/>
-          <Keypad handleSimpleOperationsButton={this.handleSimpleOperationsButton} handleOperationsButton={this.handleOperationsButton}
-                  handleNumbersButtons={this.handleNumbersButtons}/>
+        <Display inputValue={this.state.inputValue}/>
+        <History history={this.state.history}/>
+        <Keypad handleSimpleOperationsButton={this.handleSimpleOperationsButton} handleOperationsButton={this.handleOperationsButton}
+                handleNumbersButtons={this.handleNumbersButtons}/>
 
       </CalculatorLayout>
     )
@@ -189,7 +193,32 @@ export class Calculator extends React.Component {
 
   componentDidMount() {
     this.calculator = new CalculatorF()
+    const lastClear = localStorage.getItem('lastClear')
+    const timeNow = (new Date()).getTime()
+    if ((timeNow - lastClear) > 1000 * 60 * 60 * 24) {
+      console.log('clear')
+      localStorage.clear()
+      localStorage.setItem('lastClear', timeNow)
+    } else {
+      if (localStorage.getItem('stringHistory')) {
+        const history = JSON.parse(localStorage.getItem('stringHistory'))
+        this.setState({
+          history: history,
+        })
+      }
+    }
 
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.history !== this.state.history) {
+      localStorage.setItem("stringHistory", JSON.stringify(this.state.history))
+    }
+
+  }
+
+  componentWillUnmount() {
+    localStorage.setItem("stringHistory", JSON.stringify(this.state.history))
   }
 
 }
