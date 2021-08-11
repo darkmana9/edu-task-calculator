@@ -12,10 +12,10 @@ export default () => {
       <SettingsOptions>
       <label htmlFor="theme">
         Switch theme
-      <select name="theme">
+      <select defaultValue="Colored Theme" name="theme">
         <option value="LightTheme">Light Theme</option>
         <option value="DarkTheme">Dark Theme</option>
-        <option selected value="Colored Theme">Colored Theme</option>
+        <option value="Colored Theme">Colored Theme</option>
       </select>
       </label>
       <button>Clear all history</button>
