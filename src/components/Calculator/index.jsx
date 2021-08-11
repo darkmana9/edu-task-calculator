@@ -141,6 +141,22 @@ export class Calculator extends React.Component {
         this.firstInputValue = 0
         break
       }
+      case "CS": {
+        if(this.state.inputValue[0] === "-") {
+          this.setState(prevState => {
+            return {
+              inputValue: prevState.inputValue.slice(1),
+            }
+          })
+        }else {
+          this.setState(prevState => {
+            return {
+              inputValue: '-' + prevState.inputValue,
+            }
+          })
+        }
+        break
+      }
     }
   }
 
