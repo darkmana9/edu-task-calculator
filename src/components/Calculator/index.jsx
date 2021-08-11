@@ -196,7 +196,6 @@ export class Calculator extends React.Component {
     const lastClear = localStorage.getItem('lastClear')
     const timeNow = (new Date()).getTime()
     if ((timeNow - lastClear) > 1000 * 60 * 60 * 24) {
-      console.log('clear')
       localStorage.clear()
       localStorage.setItem('lastClear', timeNow)
     } else {
@@ -207,14 +206,12 @@ export class Calculator extends React.Component {
         })
       }
     }
-
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.history !== this.state.history) {
       localStorage.setItem("stringHistory", JSON.stringify(this.state.history))
     }
-
   }
 
   componentWillUnmount() {

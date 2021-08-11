@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PageLayout } from '@/layouts'
+import {PageLayout} from '@/layouts'
 import {Heading} from "@/pages/Home/components"
 import {SettingsOptions} from "@/pages/Settings/components"
 
@@ -10,15 +10,15 @@ export default () => {
     <PageLayout>
       <Heading>Settings</Heading>
       <SettingsOptions>
-      <label htmlFor="theme">
-        Switch theme
-      <select defaultValue="Colored Theme" name="theme">
-        <option value="LightTheme">Light Theme</option>
-        <option value="DarkTheme">Dark Theme</option>
-        <option value="Colored Theme">Colored Theme</option>
-      </select>
-      </label>
-      <button>Clear all history</button>
+        <label htmlFor="theme">
+          Switch theme
+          <select defaultValue="Colored Theme" name="theme">
+            <option>Light Theme</option>
+            <option>Dark Theme</option>
+            <option>Colored Theme</option>
+          </select>
+        </label>
+        <button onClick={() => {localStorage.clear()}}>Clear all history</button>
       </SettingsOptions>
     </PageLayout>
   )
