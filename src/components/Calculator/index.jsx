@@ -8,6 +8,13 @@ import {CalculatorLayout} from "@/layouts"
 function add(x, y) {
   return Math.round((x + y) * 1000) / 1000
 }
+function rem(x, y) {
+  return Math.round((x % y) * 1000) / 1000
+}
+
+function revRem(x, y, value) {
+  return Math.round((value * 1000) / 1000)
+}
 
 function sub(x, y) {
   return Math.round((x - y) * 1000) / 1000
@@ -30,6 +37,10 @@ const AddCommand = function (value) {
   return new Command(add, sub, value)
 }
 
+const RemCommand = function (value) {
+  return new Command(rem, revRem, value)
+}
+
 const SubCommand = function (value) {
   return new Command(sub, add, value)
 }
@@ -45,8 +56,10 @@ const DivCommand = function (value) {
 class CalculatorF {
   current = 0
   commands = []
+  prev = 0
 
   execute(command) {
+    this.prev = this.current
     this.current = command.execute(this.current, command.value)
     this.commands.push(command)
   }
@@ -59,7 +72,11 @@ class CalculatorF {
   getPrevValue() {
     const temp = this.commands.slice()
     const command = temp.pop()
-    return command.undo(this.current, command.value)
+    if(command){
+      return command.undo(this.current, command.value, this.prev)
+    }else{
+      return null
+    }
   }
 
   getCurrentValue() {
@@ -73,8 +90,6 @@ class CalculatorF {
   reset() {
     this.current = 0
     this.commands = []
-
-
   }
 }
 
@@ -88,7 +103,6 @@ export class Calculator extends React.Component {
       inputValue: '',
       currentOperation: '',
       history: [],
-      operationInputValue: '',
     }
   }
 
@@ -139,6 +153,10 @@ export class Calculator extends React.Component {
         switch (this.state.currentOperation) {
           case "+": {
             this.calculator.execute(new AddCommand(+this.state.inputValue))
+            break
+          }
+          case "%": {
+            this.calculator.execute(new RemCommand(+this.state.inputValue))
             break
           }
           case "-": {
