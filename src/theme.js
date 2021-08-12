@@ -39,7 +39,9 @@ const below = Object.keys(size).reduce((acc, label) => {
   return acc
 }, {})
 
-export default {
+
+
+export const  coloredTheme = {
   above,
   below,
   boxShadows,
@@ -47,11 +49,33 @@ export default {
   spaces: [0, 4, 8, 16, 32, 64, 128],
   fontSizes: [12, 14, 16, 20, 24, 32, 40, 56, 72, 80],
   colors: {
-    primary,
-    secondary,
-    secondaryLight,
-    black,
-    white,
-    error,
+    fontColor: primary,
+    backgroundColor: secondary,
+  },
+}
+
+export const  lightTheme = {
+  above,
+  below,
+  boxShadows,
+  font,
+  spaces: [0, 4, 8, 16, 32, 64, 128],
+  fontSizes: [12, 14, 16, 20, 24, 32, 40, 56, 72, 80],
+  colors: {
+    fontColor: black,
+    backgroundColor: white,
+  },
+}
+
+export const  darkTheme = {
+  above,
+  below,
+  boxShadows,
+  font,
+  spaces: [0, 4, 8, 16, 32, 64, 128],
+  fontSizes: [12, 14, 16, 20, 24, 32, 40, 56, 72, 80],
+  colors: {
+    fontColor: white,
+    backgroundColor: black,
   },
 }

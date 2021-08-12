@@ -11,6 +11,7 @@ export const DisplayInput = styled.input`
    background-color: transparent;
    font-size: 40px;
    text-align: right;
+    color:  ${({ theme }) => theme.colors.fontColor};
 `
 
 

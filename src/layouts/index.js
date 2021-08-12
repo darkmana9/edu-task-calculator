@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const PageLayout = styled.div`
   width: 100%;
   height: 100%;
-
+  background-color: ${({ theme }) => theme.colors.backgroundColor};
+  color:  ${({ theme }) => theme.colors.fontColor};
   max-width: 1280px;
-
   padding: ${({ theme }) => theme.spaces[4]}px;
   margin: 0 auto;
 `
@@ -16,6 +16,8 @@ export const HeaderLayout = styled.div`
   align-items: center;
   border: 1px solid;
   padding: 20px;
+  color:  ${({ theme }) => theme.colors.fontColor};
+  background-color: ${({ theme }) => theme.colors.backgroundColor};
 `
 
 export const CalculatorLayout = styled.div`
@@ -25,5 +27,5 @@ export const CalculatorLayout = styled.div`
   grid-template-areas:
         "d h"
         "k h";
-  grid-template-columns: 1fr 35%;
+  grid-template-columns: auto 35%;
 `

@@ -11,7 +11,7 @@ export const HeaderNavLayout = styled.nav`
 `
 export const LinksText = styled(NavLink)`
     font-size: 16px;
-    color: black;
+    color:  ${({theme}) => theme.colors.fontColor};
     text-decoration: none;
     &.active {
     border-bottom: 1px solid;
