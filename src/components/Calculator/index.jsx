@@ -8,6 +8,7 @@ import {CalculatorLayout} from "@/layouts"
 function add(x, y) {
   return Math.round((x + y) * 1000) / 1000
 }
+
 function rem(x, y) {
   return Math.round((x % y) * 1000) / 1000
 }
@@ -72,9 +73,9 @@ class CalculatorF {
   getPrevValue() {
     const temp = this.commands.slice()
     const command = temp.pop()
-    if(command){
+    if (command) {
       return command.undo(this.current, command.value, this.prev)
-    }else{
+    } else {
       return null
     }
   }
@@ -103,6 +104,7 @@ export class Calculator extends React.Component {
       inputValue: '',
       currentOperation: '',
       history: [],
+      expressionBuilder: [],
     }
   }
 
@@ -133,6 +135,7 @@ export class Calculator extends React.Component {
         this.firstInputValue = 0
         this.setState({
           inputValue: '',
+          expressionBuilder: [],
         })
         break
       }
@@ -142,13 +145,13 @@ export class Calculator extends React.Component {
         break
       }
       case "CS": {
-        if(this.state.inputValue[0] === "-") {
+        if (this.state.inputValue[0] === "-") {
           this.setState(prevState => {
             return {
               inputValue: prevState.inputValue.slice(1),
             }
           })
-        }else {
+        } else {
           this.setState(prevState => {
             return {
               inputValue: '-' + prevState.inputValue,
@@ -164,7 +167,9 @@ export class Calculator extends React.Component {
     if (this.state.inputValue !== '') {
       if (this.firstInputValue === 0) {
         this.firstInputValue = this.state.inputValue
-        this.calculator.setFirstInputValue(+this.firstInputValue)
+        this.setState({
+          expressionBuilder:  [this.firstInputValue],
+        })
       } else {
         switch (this.state.currentOperation) {
           case "+": {
@@ -188,8 +193,10 @@ export class Calculator extends React.Component {
             break
           }
         }
+        console.log(this.state.expressionBuilder)
         this.setState(prevState => {
           return {
+            expressionBuilder: prevState.expressionBuilder.concat(` ${this.state.currentOperation} ${this.state.inputValue}`),
             history: prevState.history.concat(`${this.calculator.getPrevValue()} ${this.state.currentOperation} ${this.state.inputValue}  \n`),
             inputValue: this.calculator.getCurrentValue(),
           }
@@ -218,9 +225,11 @@ export class Calculator extends React.Component {
 
         <Display inputValue={this.state.inputValue}/>
         <History history={this.state.history}/>
-        <Keypad handleSimpleOperationsButton={this.handleSimpleOperationsButton} handleOperationsButton={this.handleOperationsButton}
-                handleNumbersButtons={this.handleNumbersButtons}/>
-
+        <Keypad
+          handleSimpleOperationsButton={this.handleSimpleOperationsButton}
+          handleOperationsButton={this.handleOperationsButton}
+          handleNumbersButtons={this.handleNumbersButtons}/>
+        {this.state.expressionBuilder}
       </CalculatorLayout>
     )
   }

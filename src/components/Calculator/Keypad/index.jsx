@@ -14,11 +14,12 @@ export const Keypad = props => {
   return (
     <KeypadWrapper>
       {buttonsText.map((el, i) => {
-        return <Button handleNumbersButtons={props.handleNumbersButtons}
-                       handleOperationsButton={props.handleOperationsButton}
-                       handleSimpleOperationsButton={props.handleSimpleOperationsButton}
-                       key={buttonsText[i]}
-                       text={buttonsText[i]}/>
+        return <Button
+          handleNumbersButtons={props.handleNumbersButtons}
+          handleOperationsButton={props.handleOperationsButton}
+          handleSimpleOperationsButton={props.handleSimpleOperationsButton}
+          key={buttonsText[i]}
+          text={buttonsText[i]}/>
       })}
     </KeypadWrapper>
   )
