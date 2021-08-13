@@ -167,6 +167,7 @@ export class Calculator extends React.Component {
     if (this.state.inputValue !== '') {
       if (this.firstInputValue === 0) {
         this.firstInputValue = this.state.inputValue
+        this.calculator.setFirstInputValue(+this.firstInputValue)
         this.setState({
           expressionBuilder:  [this.firstInputValue],
         })
@@ -229,7 +230,7 @@ export class Calculator extends React.Component {
           handleSimpleOperationsButton={this.handleSimpleOperationsButton}
           handleOperationsButton={this.handleOperationsButton}
           handleNumbersButtons={this.handleNumbersButtons}/>
-        {this.state.expressionBuilder}
+        <div id="expressionBuilder">Expression: {this.state.expressionBuilder}</div>
       </CalculatorLayout>
     )
   }

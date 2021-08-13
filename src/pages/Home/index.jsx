@@ -45,7 +45,7 @@ export default () => {
                             commitTime,
                             interactions) => {
    /* console.log(`id: ${id} phase: ${phase} actualDuration: ${actualDuration} baseDuration:${baseDuration}
-                startTime: ${startTime} commitTime: ${commitTime}  interactions: ${interactions}`)*/
+                startTime: ${startTime} commitTime: ${commitTime}  interactions: ${interactions}`) */
   }
   return (
     <PageLayout>

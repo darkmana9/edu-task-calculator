@@ -8,7 +8,7 @@ export const History = props => {
   return (
     <HistoryWrapper>
       <Heading>History</Heading>
-      <HistoryTextArea value={props.history.join('')} readOnly></HistoryTextArea>
+      <HistoryTextArea value={props.history.join('')} readOnly />
     </HistoryWrapper>
   )
 }
