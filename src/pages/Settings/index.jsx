@@ -12,11 +12,11 @@ export default props => {
       <SettingsOptions>
         <label htmlFor="theme">
           Switch theme
-          <select onChange={props.handleSelectTheme} defaultValue="Colored Theme"
+          <select onChange={props.handleSelectTheme} defaultValue={localStorage.getItem('theme')}
                   name="theme">
+            <option>Colored Theme</option>
             <option>Light Theme</option>
             <option>Dark Theme</option>
-            <option>Colored Theme</option>
           </select>
         </label>
         <button onClick={() => {
