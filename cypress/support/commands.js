@@ -58,7 +58,6 @@ Cypress.Commands.add("clearInput", () => {
   cy.get('button').contains('CE').click({force: true})
 })
 
-
 Cypress.Commands.add("verifyAddOperation", () => {
   cy.wait(100)
   const commands = '1+1+'.split('')
@@ -144,7 +143,6 @@ Cypress.Commands.add("verifyRemOperation", () => {
   )
 })
 
-
 Cypress.Commands.add("verifyHistoryAddingAndClearing", () => {
   cy.wait(100)
   const commands = '1+1*4+3+1='.split('')
@@ -173,4 +171,36 @@ Cypress.Commands.add("verifyHistoryAddingAndClearing", () => {
 
 })
 
+Cypress.Commands.add("verifyThemesChanging", () => {
+  cy.wait(100)
+  cy.get('select').select('Light Theme')
+  cy.get('div.ewFXhq').should(
+    'have.css',
+    'background-color',
+  ).and(
+    'match', /255, 255, 255/,
+  ).then(() => {
+    expect(localStorage.getItem('theme')).to.eq('Light Theme')
+  })
+  cy.get('select').select('Dark Theme')
+  cy.get('div.bhIibm').should(
+    'have.css',
+    'background-color',
+  ).and(
+    'match', /0, 0, 0/,
+  ).then(() => {
+    expect(localStorage.getItem('theme')).to.eq('Dark Theme')
+  })
+})
 
+Cypress.Commands.add("verifyNavigation", () => {
+  cy.wait(100)
+  cy.get('nav a').contains('Settings').click({force: true})
+  cy.location().should(loc => {
+    expect(loc.pathname).to.eq('/settings')
+  })
+  cy.get('nav a').contains('Home').click({force: true})
+  cy.location().should(loc => {
+    expect(loc.pathname).to.eq('/')
+  })
+})
