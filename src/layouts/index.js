@@ -18,6 +18,9 @@ export const HeaderLayout = styled.div`
   padding: 20px;
   color:  ${({ theme }) => theme.colors.fontColor};
   background-color: ${({ theme }) => theme.colors.backgroundColor};
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
 `
 
 export const CalculatorLayout = styled.div`
