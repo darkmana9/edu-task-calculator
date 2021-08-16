@@ -17,6 +17,10 @@ function revRem(x, y, value) {
   return Math.round((value * 1000) / 1000)
 }
 
+function revDiv(x, y, value) {
+  return Math.round((value * 1000) / 1000)
+}
+
 function sub(x, y) {
   return Math.round((x - y) * 1000) / 1000
 }
@@ -51,7 +55,7 @@ const MulCommand = function (value) {
 }
 
 const DivCommand = function (value) {
-  return new Command(div, mul, value)
+  return new Command(div, revDiv, value)
 }
 
 class CalculatorF {
@@ -223,13 +227,12 @@ export class Calculator extends React.Component {
   render() {
     return (
       <CalculatorLayout>
-
         <Display inputValue={this.state.inputValue}/>
         <History history={this.state.history}/>
         <Keypad
-          handleSimpleOperationsButton={this.handleSimpleOperationsButton}
-          handleOperationsButton={this.handleOperationsButton}
-          handleNumbersButtons={this.handleNumbersButtons}/>
+          onHandleSimpleOperationsButton={this.handleSimpleOperationsButton}
+          onHandleOperationsButton={this.handleOperationsButton}
+          onHandleNumbersButtons={this.handleNumbersButtons}/>
         <div id="expressionBuilder">Expression: {this.state.expressionBuilder}</div>
       </CalculatorLayout>
     )
