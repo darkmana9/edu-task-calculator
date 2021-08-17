@@ -3,6 +3,7 @@ import {Display} from "@/components/Calculator/Display"
 import {History} from "@/components/Calculator/History"
 import {Keypad} from "@/components/Calculator/Keypad"
 import {CalculatorLayout} from "@/layouts"
+import {ExpressionBuilder} from "@/components/Calculator/ExpressionBuilder"
 
 
 function add(x, y) {
@@ -198,7 +199,6 @@ export class Calculator extends React.Component {
             break
           }
         }
-        console.log(this.state.expressionBuilder)
         this.setState(prevState => {
           return {
             expressionBuilder: prevState.expressionBuilder.concat(` ${this.state.currentOperation} ${this.state.inputValue}`),
@@ -233,7 +233,7 @@ export class Calculator extends React.Component {
           onHandleSimpleOperationsButton={this.handleSimpleOperationsButton}
           onHandleOperationsButton={this.handleOperationsButton}
           onHandleNumbersButtons={this.handleNumbersButtons}/>
-        <div id="expressionBuilder">Expression: {this.state.expressionBuilder}</div>
+        <ExpressionBuilder expression={this.state.expressionBuilder}/>
       </CalculatorLayout>
     )
   }

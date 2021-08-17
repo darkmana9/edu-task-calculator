@@ -12,6 +12,6 @@ export const Display = props => {
   )
 }
 
-Display.prototype = {
+Display.propTypes = {
   inputValue: PropTypes.string,
 }

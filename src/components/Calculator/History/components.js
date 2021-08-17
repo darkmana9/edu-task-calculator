@@ -3,6 +3,9 @@ import styled from "styled-components"
 export const HistoryWrapper = styled.div`
   grid-area: h;
   margin: 0 auto;
+  @media (max-width: 990px) {
+        height: fit-content;
+  }
 `
 
 export const HistoryTextArea = styled.textarea`
@@ -10,6 +13,7 @@ export const HistoryTextArea = styled.textarea`
   height: 90%;
   padding: 10px;
   margin-top: 10px;
+  width: 100%;
   &::-webkit-scrollbar-thumb{
     background: #df8e93;
   };

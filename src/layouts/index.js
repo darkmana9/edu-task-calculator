@@ -29,6 +29,15 @@ export const CalculatorLayout = styled.div`
   padding: 20px;
   grid-template-areas:
         "d h"
-        "k h";
+        "k h"
+        "e e";
   grid-template-columns: auto 35%;
+  @media (max-width: 990px) {
+  grid-template-areas:
+        "d d"
+        "k k"
+        "h h"
+        "e e";
+  padding: 5px;
+  }
 `

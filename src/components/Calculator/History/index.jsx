@@ -13,6 +13,6 @@ export const History = props => {
   )
 }
 
-History.prototype = {
+History.propsType = {
   history: PropTypes.array,
 }
