@@ -128,102 +128,118 @@ export class Calculator extends React.Component {
   }
 
   handleSimpleOperationsButton = operation => {
-    switch (operation) {
-      case "CE": {
-        this.setState({
-          inputValue: '',
-        })
-        break
-      }
-      case "C": {
-        this.calculator.reset()
-        this.firstInputValue = 0
-        this.setState({
-          inputValue: '',
-          expressionBuilder: [],
-        })
-        break
-      }
-      case "=": {
-        this.handleOperationsButton(this.state.currentOperation)
-        this.firstInputValue = 0
-        this.inputFlag = 0
-        break
-      }
-      case "CS": {
-        if (this.state.inputValue[0] === "-") {
-          this.setState(prevState => {
-            return {
-              inputValue: prevState.inputValue.slice(1),
-            }
-          })
-        } else {
-          this.setState(prevState => {
-            return {
-              inputValue: '-' + prevState.inputValue,
-            }
-          })
-        }
-        break
-      }
-    }
+
   }
 
-  handleOperationsButton = operation => {
-    console.log(operation, this.state.currentOperation, this.inputFlag)
+  handleOperationsButton = (e, currOperation) => {
+    const operation = e ? e.target.innerText : currOperation
 
-    if (this.state.inputValue !== '' && this.inputFlag === 0) {
-      if (this.firstInputValue === 0) {
-        this.firstInputValue = this.state.inputValue
-        this.calculator.setFirstInputValue(+this.firstInputValue)
-        this.setState({
-          expressionBuilder: [this.firstInputValue],
-        })
-      } else {
-        switch (this.state.currentOperation) {
-          case "+": {
-            this.calculator.execute(new AddCommand(+this.state.inputValue))
-            break
-          }
-          case "%": {
-            this.calculator.execute(new RemCommand(+this.state.inputValue))
-            break
-          }
-          case "-": {
-            this.calculator.execute(new SubCommand(+this.state.inputValue))
-            break
-          }
-          case "*": {
-            this.calculator.execute(new MulCommand(+this.state.inputValue))
-            break
-          }
-          case "/": {
-            this.calculator.execute(new DivCommand(+this.state.inputValue))
-            break
-          }
-        }
-        this.setState(prevState => {
-          return {
-            expressionBuilder: prevState.expressionBuilder.concat(` ${this.state.currentOperation} ${this.state.inputValue}`),
-            history: prevState.history.concat(`${this.calculator.getPrevValue()} ${this.state.currentOperation} ${this.state.inputValue}  \n`),
-            inputValue: this.calculator.getCurrentValue(),
-          }
-        })
-        this.inputFlag = 1
-      }
 
-      if (this.inputFlag === 0) {
-        this.inputFlag = 1
+    if (operation.match(/[0-9.]/)) {
+      if (this.inputFlag === 1) {
+        this.inputFlag = 0
         this.setState({
           inputValue: '',
         })
       }
-
-      this.setState({
-        currentOperation: operation,
+      this.setState(prevState => {
+        return {
+          inputValue: prevState.inputValue + operation,
+        }
       })
-    }
+    } else if (operation.match(/[+-/*%]/)) {
+      if (this.state.inputValue !== '' && this.inputFlag === 0) {
+        if (this.firstInputValue === 0) {
+          this.firstInputValue = this.state.inputValue
+          this.calculator.setFirstInputValue(+this.firstInputValue)
+          this.setState({
+            expressionBuilder: [this.firstInputValue],
+          })
+        } else {
+          switch (this.state.currentOperation) {
+            case "+": {
+              this.calculator.execute(new AddCommand(+this.state.inputValue))
+              break
+            }
+            case "%": {
+              this.calculator.execute(new RemCommand(+this.state.inputValue))
+              break
+            }
+            case "-": {
+              this.calculator.execute(new SubCommand(+this.state.inputValue))
+              break
+            }
+            case "*": {
+              this.calculator.execute(new MulCommand(+this.state.inputValue))
+              break
+            }
+            case "/": {
+              this.calculator.execute(new DivCommand(+this.state.inputValue))
+              break
+            }
+          }
+          this.setState(prevState => {
+            return {
+              expressionBuilder: prevState.expressionBuilder.concat(` ${this.state.currentOperation} ${this.state.inputValue}`),
+              history: prevState.history.concat(`${this.calculator.getPrevValue()} ${this.state.currentOperation} ${this.state.inputValue}  \n`),
+              inputValue: this.calculator.getCurrentValue(),
+            }
+          })
+          this.inputFlag = 1
+        }
 
+        if (this.inputFlag === 0) {
+          this.inputFlag = 1
+          this.setState({
+            inputValue: '',
+          })
+        }
+
+        this.setState({
+          currentOperation: operation,
+        })
+      }
+    } else if (operation.match(/[C=]/)) {
+      switch (operation) {
+        case "CE": {
+          this.setState({
+            inputValue: '',
+          })
+          break
+        }
+        case "C": {
+          this.calculator.reset()
+          this.firstInputValue = 0
+          this.setState({
+            inputValue: '',
+            expressionBuilder: [],
+          })
+          break
+        }
+        case "=": {
+          this.handleOperationsButton(null, this.state.currentOperation)
+          this.firstInputValue = 0
+          this.inputFlag = 0
+          break
+        }
+        case "CS": {
+          if (this.state.inputValue[0] === "-") {
+            this.setState(prevState => {
+              return {
+                inputValue: prevState.inputValue.slice(1),
+              }
+            })
+          } else {
+            this.setState(prevState => {
+              return {
+                inputValue: '-' + prevState.inputValue,
+              }
+            })
+          }
+          break
+        }
+      }
+    }
   }
 
 
