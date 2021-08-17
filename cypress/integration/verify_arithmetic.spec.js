@@ -1,7 +1,9 @@
 it('visits the app', () => {
-  cy.visit('/')
+  cy.visit('/#/')
 })
-
+afterEach(() => {
+  cy.clearInput()
+})
 describe('Verify arithmetic operations', () => {
   it('verify add operation (+)', () => {
       cy.verifyAddOperation()

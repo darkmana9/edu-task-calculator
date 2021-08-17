@@ -3,8 +3,7 @@ import {numbers} from "../support/objects"
 
 describe("Verify that the user is able to input numbers", () => {
   it("Visit Home", () => {
-    cy.visit("/")
-    cy.wait(150)
+    cy.visit("/#/")
   })
   afterEach(() => {
     cy.clearInput()

@@ -1,5 +1,5 @@
 it('visits the app', () => {
-  cy.visit('/')
+  cy.visit('/#/')
 })
 
 describe('Verify arithmetic operations', () => {

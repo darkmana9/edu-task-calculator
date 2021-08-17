@@ -1,5 +1,5 @@
 it('visits the app', () => {
-  cy.visit('/settings')
+  cy.visit('/#/settings')
 })
 
 describe('Verify themes changing', () => {

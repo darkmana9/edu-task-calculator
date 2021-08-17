@@ -158,9 +158,9 @@ Cypress.Commands.add("verifyHistoryAddingAndClearing", () => {
   ).then(() => {
     expect(localStorage.getItem('stringHistory')).to.eq('["1 + 1  \\n","2 * 4  \\n","8 + 3  \\n","11 + 1  \\n"]')
   })
-  cy.visit('/settings')
+  cy.visit('/#/settings')
   cy.get('button').contains('Clear all history').click({force: true})
-  cy.visit('/')
+  cy.visit('/#/')
   cy.get(calculatorScreen.history.get).should(
     "have.value",
     '',
@@ -197,10 +197,10 @@ Cypress.Commands.add("verifyNavigation", () => {
   cy.wait(100)
   cy.get('nav a').contains('Settings').click({force: true})
   cy.location().should(loc => {
-    expect(loc.pathname).to.eq('/settings')
+    expect(loc.hash).to.eq('#/settings')
   })
   cy.get('nav a').contains('Home').click({force: true})
   cy.location().should(loc => {
-    expect(loc.pathname).to.eq('/')
+    expect(loc.hash).to.eq('#/')
   })
 })
