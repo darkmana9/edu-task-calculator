@@ -13,5 +13,8 @@ export const Display = props => {
 }
 
 Display.propTypes = {
-  inputValue: PropTypes.string,
+  inputValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 }
