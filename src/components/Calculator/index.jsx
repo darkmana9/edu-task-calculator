@@ -19,7 +19,7 @@ function revRem(x, y, value) {
 }
 
 function revDiv(x, y, value) {
-  return Math.round((value * 1000) / 1000)
+  return value
 }
 
 function sub(x, y) {
@@ -147,6 +147,7 @@ export class Calculator extends React.Component {
       case "=": {
         this.handleOperationsButton(this.state.currentOperation)
         this.firstInputValue = 0
+        this.inputFlag = 0
         break
       }
       case "CS": {
@@ -169,12 +170,14 @@ export class Calculator extends React.Component {
   }
 
   handleOperationsButton = operation => {
-    if (this.state.inputValue !== '') {
+    console.log(operation, this.state.currentOperation, this.inputFlag)
+
+    if (this.state.inputValue !== '' && this.inputFlag === 0) {
       if (this.firstInputValue === 0) {
         this.firstInputValue = this.state.inputValue
         this.calculator.setFirstInputValue(+this.firstInputValue)
         this.setState({
-          expressionBuilder:  [this.firstInputValue],
+          expressionBuilder: [this.firstInputValue],
         })
       } else {
         switch (this.state.currentOperation) {
@@ -219,8 +222,8 @@ export class Calculator extends React.Component {
       this.setState({
         currentOperation: operation,
       })
-
     }
+
   }
 
 
