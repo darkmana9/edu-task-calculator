@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
 
-
 export default createGlobalStyle`
   * {
     margin: 0;
@@ -27,9 +26,5 @@ export default createGlobalStyle`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
-
-  #root {
-    display: flex;
   }
 `

@@ -2,17 +2,24 @@ import { css } from 'styled-components'
 
 const font = 'sans-serif'
 
-// Color palette
 const black = '#000000'
 const white = '#ffffff'
-const error = '#c86464'
 const primary = '#c06c84'
 const secondary = '#6c5b7b'
-const secondaryLight = '#6a6b7b'
 
 const boxShadows = [
   'box-shadow: 0px 4px 24px -8px rgba(0,0,0,0.75)',
 ]
+
+const spaces = [0, 4, 8, 16, 32, 64, 128]
+const fontSizes = [12, 14, 16, 20, 24, 32, 40, 56, 72, 80]
+
+
+const button = {
+  size: [70, 40],
+  margin: '0 auto',
+  borderRadius: 10,
+}
 
 const size = {
   xs: 550,
@@ -39,15 +46,15 @@ const below = Object.keys(size).reduce((acc, label) => {
   return acc
 }, {})
 
-
-
 export const  coloredTheme = {
   above,
   below,
   boxShadows,
   font,
-  spaces: [0, 4, 8, 16, 32, 64, 128],
-  fontSizes: [12, 14, 16, 20, 24, 32, 40, 56, 72, 80],
+  spaces,
+  fontSizes,
+  button,
+  size,
   colors: {
     fontColor: primary,
     backgroundColor: secondary,
@@ -59,8 +66,10 @@ export const  lightTheme = {
   below,
   boxShadows,
   font,
-  spaces: [0, 4, 8, 16, 32, 64, 128],
-  fontSizes: [12, 14, 16, 20, 24, 32, 40, 56, 72, 80],
+  spaces,
+  fontSizes,
+  button,
+  size,
   colors: {
     fontColor: black,
     backgroundColor: white,
@@ -72,8 +81,10 @@ export const  darkTheme = {
   below,
   boxShadows,
   font,
-  spaces: [0, 4, 8, 16, 32, 64, 128],
-  fontSizes: [12, 14, 16, 20, 24, 32, 40, 56, 72, 80],
+  spaces,
+  fontSizes,
+  button,
+  size,
   colors: {
     fontColor: white,
     backgroundColor: black,

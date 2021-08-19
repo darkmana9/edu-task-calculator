@@ -4,5 +4,5 @@ export const SettingsOptions = styled.div`
     display: flex;
     flex-direction: column;
     width: min-content;
-    margin-top: 15px;
+    margin-top: ${({ theme }) => theme.spaces[2]}px;
 `
