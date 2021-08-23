@@ -68,7 +68,7 @@ export class CalculatorPattern {
     return this.current
   }
 
-  setFirstInputValue(val) {
+  setInitialInputValue(val) {
     this.current = val
   }
 

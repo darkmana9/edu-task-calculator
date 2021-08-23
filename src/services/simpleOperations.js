@@ -1,12 +1,13 @@
-
-export const doSimpleOperation = (operation,
-                                  currentOperation,
-                                  inputValue,
-                                  firstInputValue,
-                                  expressionBuilder,
-                                  inputFlag,
-                                  calculator,
-                                  handleOperationsButton) => {
+export const doSystemicOperation = ({
+                                    operation,
+                                    currentOperation,
+                                    inputValue,
+                                    initialInputValue,
+                                    expressionBuilder,
+                                    clearInput,
+                                    calculator,
+                                    handleOperationsButton,
+                                  }) => {
   switch (operation) {
     case "CE": {
       inputValue = ''
@@ -14,25 +15,25 @@ export const doSimpleOperation = (operation,
     }
     case "C": {
       calculator.reset()
-      firstInputValue = 0
+      initialInputValue = 0
       inputValue = ''
       expressionBuilder = []
       break
     }
     case "=": {
       handleOperationsButton(null, currentOperation)
-      firstInputValue = 0
-      inputFlag = 1
+      initialInputValue = 0
+      clearInput = 1
       break
     }
     case "CS": {
       if (inputValue[0] === "-") {
-            inputValue = inputValue.slice(1)
+        inputValue = inputValue.slice(1)
       } else {
-            inputValue = '-' + inputValue
-        }
-      break
+        inputValue = '-' + inputValue
       }
+      break
+    }
   }
-  return {inputValue, firstInputValue, expressionBuilder, inputFlag, calculator}
+  return {inputValue, initialInputValue, expressionBuilder, clearInput, calculator}
 }

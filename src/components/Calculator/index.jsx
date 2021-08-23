@@ -6,13 +6,13 @@ import { Keypad } from "@/components/Calculator/Keypad"
 import { CalculatorLayout } from "@/layouts"
 import { ExpressionBuilder } from "@/components/Calculator/ExpressionBuilder"
 import { CalculatorPattern } from "@/services/calculatorPattern"
-import { doSimpleOperation } from "@/services/simpleOperations"
+import { doSystemicOperation } from "@/services/simpleOperations"
 
 export class Calculator extends React.Component {
   constructor(props) {
     super(props)
-    this.firstInputValue = 0
-    this.inputFlag = 0
+    this.initialInputValue = 0
+    this.clearInput = false
     this.state = {
       inputValue: '',
       currentOperation: '',
@@ -24,8 +24,8 @@ export class Calculator extends React.Component {
   handleOperationsButton = (e, currOperation) => {
     const operation = e ? e.target.innerText : currOperation
     if (operation.match(/[0-9.]/)) {
-      if (this.inputFlag === 1) {
-        this.inputFlag = 0
+      if (this.clearInput) {
+        this.clearInput = false
         this.setState({
           inputValue: '',
         })
@@ -36,12 +36,12 @@ export class Calculator extends React.Component {
         }
       })
     } else if (operation.match(/[+-/*%]/)) {
-      if (this.state.inputValue !== '' && this.inputFlag === 0) {
-        if (this.firstInputValue === 0) {
-          this.firstInputValue = this.state.inputValue
-          this.calculator.setFirstInputValue(+this.firstInputValue)
+      if (this.state.inputValue !== '' && !this.clearInput) {
+        if (this.initialInputValue === 0) {
+          this.initialInputValue = this.state.inputValue
+          this.calculator.setInitialInputValue(+this.initialInputValue)
           this.setState({
-            expressionBuilder: [this.firstInputValue],
+            expressionBuilder: [this.initialInputValue],
           })
         } else {
           this.calculator.doMathOperation(this.state.currentOperation, this.state.inputValue)
@@ -52,10 +52,10 @@ export class Calculator extends React.Component {
               inputValue: this.calculator.getCurrentValue(),
             }
           })
-          this.inputFlag = 1
+          this.clearInput = true
         }
-        if (this.inputFlag === 0) {
-          this.inputFlag = 1
+        if (!this.clearInput) {
+          this.clearInput = true
           this.setState({
             inputValue: '',
           })
@@ -65,24 +65,25 @@ export class Calculator extends React.Component {
         })
       }
     } else if (operation.match(/[C=]/)) {
-      const result = doSimpleOperation(
+      const param = {
         operation,
-        this.state.currentOperation,
-        this.state.inputValue,
-        this.firstInputValue,
-        this.state.expressionBuilder,
-        this.inputFlag,
-        this.calculator,
-        this.handleOperationsButton)
+        currentOperation: this.state.currentOperation,
+        inputValue: this.state.inputValue,
+        initialInputValue: this.initialInputValue,
+        expressionBuilder: this.state.expressionBuilder,
+        clearInput: this.clearInput,
+        calculator: this.calculator,
+        handleOperationsButton: this.handleOperationsButton,
+      }
+      const result = doSystemicOperation(param)
       if(operation !== '='){
         this.setState({
           inputValue: result.inputValue,
           expressionBuilder: result.expressionBuilder,
         })
-
       }
-      this.inputFlag = result.inputFlag
-      this.firstInputValue = result.firstInputValue
+      this.clearInput = result.clearInput
+      this.initialInputValue = result.initialInputValue
     }
   }
 
@@ -123,5 +124,4 @@ export class Calculator extends React.Component {
   componentWillUnmount() {
     localStorage.setItem("stringHistory", JSON.stringify(this.state.history))
   }
-
 }
