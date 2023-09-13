@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull-request:
+    branches: [ "master" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+           node-version: 16
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Lint
+        run: yarn eslint:fix
+      - name: E2E
+        run: yarn cypress:test
+  deploy:
+      - name: Deploy to gh pages
+        run: yarn deploy
+
