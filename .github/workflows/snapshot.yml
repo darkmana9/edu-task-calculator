@@ -5,14 +5,14 @@ on:
     types:
       - closed
 jobs:
-  if_merged:
+  build:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-           node-version: 16
+          node-version: 16
       - name: Install
         run: yarn install
       - name: Build
