@@ -1,8 +1,12 @@
-name: CI
+name: Build and Deploy
 
-on: [pull_request]
+on:
+  pull_request_target:
+    types:
+      - closed
 jobs:
-  build:
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,5 +22,8 @@ jobs:
       - name: E2E
         run: yarn cypress:test
       - name: Deploy to gh pages
+        uses: JamesIves/github-pages-deploy-action@v4
+          with:
+            folder: dist
         run: yarn deploy
 
