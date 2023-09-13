@@ -1,12 +1,10 @@
 /***/
 
-/* unused harmony export Card */
-
 /* harmony export (binding) */
 
 /* harmony import */
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
+// EXTERNAL MODULE: ./node_modules/react/index.js
 
 /*#__PURE__*/
 
@@ -14,11 +12,10 @@
 
 // CONCATENATED MODULE: ./src/components/Calculator/History/components.js
 
-// CONCATENATED MODULE: ./src/components/Calculator/Keypad/Button/components.js
+// CONCATENATED MODULE: ./src/components/Calculator/Keypad/components.js
 
-// CONCATENATED MODULE: ./src/components/Calculator/Keypad/Button/index.jsx
+// CONCATENATED MODULE: ./src/helpers/mathOperations.js
 
-// CONCATENATED MODULE: ./src/components/Calculator/index.jsx
+// CONCATENATED MODULE: ./src/helpers/index.js
 
-/* console.log(`id: ${id} phase: ${phase} actualDuration: ${actualDuration} baseDuration:${baseDuration}
-                 startTime: ${startTime} commitTime: ${commitTime}  interactions: ${interactions}`) */
+// CONCATENATED MODULE: ./src/services/calculatorPattern.js
