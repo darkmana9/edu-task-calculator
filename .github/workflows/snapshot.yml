@@ -1,16 +1,18 @@
-name: CI
+name: Build and Deploy
 
 on:
-  pull-request:
-    branches: [ "master" ]
+  pull_request_target:
+    types:
+      - closed
 jobs:
   build:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-           node-version: 16
+          node-version: 16
       - name: Install
         run: yarn install
       - name: Build
@@ -19,7 +21,8 @@ jobs:
         run: yarn eslint:fix
       - name: E2E
         run: yarn cypress:test
-  deploy:
       - name: Deploy to gh pages
-        run: yarn deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
 
