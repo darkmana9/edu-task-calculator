@@ -53,8 +53,8 @@ export default () => {
         <Switch>
           <Route
             exact
-            path={HOME_PAGE_ROUTE}
             component={HomePage}
+            path={HOME_PAGE_ROUTE}
           />
           <Route
             exact
